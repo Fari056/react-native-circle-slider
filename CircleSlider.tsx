@@ -1,6 +1,6 @@
 import React, { FC, useState, useRef, useCallback } from "react";
 import { PanResponder, Dimensions } from "react-native";
-import Svg, { Path, Circle, G, Text } from "react-native-svg";
+import Svg, { Path, Circle, G, Text, TSpan, TextPath } from "react-native-svg";
 
 interface Props {
 	btnRadius?: number;
@@ -108,16 +108,43 @@ const CircleSlider: FC<Props> = ({
 				strokeWidth={strokeWidth}
 				fill={fillColor}
 			/>
-
-			<Path
-				stroke={meterColor}
-				strokeWidth={dialWidth}
-				fill="none"
-				d={`M${startCoord.x} ${startCoord.y} A ${dR} ${dR} 0 ${
-					angle > 180 ? 1 : 0
-				} 1 ${endCoord.x} ${endCoord.y}`}
-			/>
-
+			<G id='circle'>
+				<Path
+					stroke={meterColor}
+					strokeWidth={dialWidth}
+					fill="none"
+					d={`M${startCoord.x} ${startCoord.y} A ${dR} ${dR} 0 ${angle > 180 ? 1 : 0
+						} 1 ${endCoord.x} ${endCoord.y}`}
+				/>
+				<Text fill="green" fontSize="5">
+					<TextPath href="#circle">
+						<TSpan dx="0" fill={'black'} dy={2}>
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+							| | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+						</TSpan>
+					</TextPath>
+				</Text>
+			</G>
+			<G x={startCoord.x - bR} y={startCoord.y - bR}>
+				<Circle
+					r={bR}
+					cx={bR}
+					cy={bR}
+					fill={meterColor}
+					{...panResponder.panHandlers}
+				/>
+			</G>
 			<G x={endCoord.x - bR} y={endCoord.y - bR}>
 				<Circle
 					r={bR}

@@ -49,7 +49,6 @@ const CircleSlider: FC<Props> = ({
 				let xOrigin = xCenter - (dialRadius + btnRadius);
 				let yOrigin = yCenter - (dialRadius + btnRadius);
 				let a = cartesianToPolar(gs.moveX - xOrigin, gs.moveY - yOrigin);
-
 				if (a <= min) {
 					setAngle(min);
 				} else if (a >= max) {
@@ -77,7 +76,6 @@ const CircleSlider: FC<Props> = ({
 	const cartesianToPolar = useCallback(
 		(x, y) => {
 			let hC = dialRadius + btnRadius;
-
 			if (x === 0) {
 				return y > hC ? 0 : 180;
 			} else if (y === 0) {
@@ -97,7 +95,6 @@ const CircleSlider: FC<Props> = ({
 	const dR = dialRadius;
 	const startCoord = polarToCartesian(0);
 	var endCoord = polarToCartesian(angle);
-
 	return (
 		<Svg width={width} height={width}>
 			<Circle
@@ -142,7 +139,6 @@ const CircleSlider: FC<Props> = ({
 					cx={bR}
 					cy={bR}
 					fill={meterColor}
-					{...panResponder.panHandlers}
 				/>
 			</G>
 			<G x={endCoord.x - bR} y={endCoord.y - bR}>
@@ -152,6 +148,7 @@ const CircleSlider: FC<Props> = ({
 					cy={bR}
 					fill={meterColor}
 					{...panResponder.panHandlers}
+
 				/>
 				<Text
 					x={bR}
@@ -163,7 +160,7 @@ const CircleSlider: FC<Props> = ({
 					{onValueChange(angle) + ""}
 				</Text>
 			</G>
-		</Svg>
+		</Svg >
 	);
 };
 
